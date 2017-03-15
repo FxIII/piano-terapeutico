@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="description" content="piano terapeutico">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>JS Bin</title>
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment-with-locales.min.js"></script>
+    <link href="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.16/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/lodash/4/lodash.min.js"></script>
+  </head>
+  <body>
+    <script type="x-template" id="qInline_tmpl">
+      <div class="form-group">
+          <div class="col-md-12">
+            <div class="input-group">
+              <span class="input-group-addon">{{model.label||model.name}}</span>
+              <input id="{{prefix||''}}{{model.name}}" 
+                     name="{{model.name}}" 
+                     class="form-control" 
+                     placeholder="{{model.pholder || model.label}}" 
+                     v-model="model.value" type="text" required="">
+      </div>
+      </div>
+      </div>
+    </script>
+    <script type="x-template" id="qPositiv_tmpl">
+      <div class="form-group">
+          <div class="col-md-12">
+            <div class="input-group">
+              <span class="input-group-addon">{{model.label||model.name}}</span>
+              <select id="{{prefix||''}}{{model.name}}"
+                      v-model="model.value"
+                      name="{{model.name}}" class="form-control">
+                     <option value="">non eseguito</option>
+                     <option value="false">negativo</option>
+                     <option value="true">posititvo</option>
+              </select>
+      </div>
+      </div>
+      </div>
+    </script>
+    <script type="x-template" id="qTextarea_tmpl">
+        <div class="row {{model.name}}">
+          <div class="col-md-12">
+            <label class="col-md-1 control-label" for="{{model.name}}">{{model.label}}</label><div class="col-md-8">
+            <textarea class="form-control" id="{{prefix||''}}{{model.name}}" name="{{model.name}}" v-model="model.value"></textarea>
+      </div>
+      </div>
+      </div>
+    </script>
+    <script type="x-template" id="qCheck_tmpl">
+    <div class="form-group">
+          <div class="col-md-12">
+            <div class="input-group">
+              <span class="input-group-addon">{{model.label}}</span>
+              <span class="input-group-addon">     
+                <input type="checkbox" v-model="model.value">     
+      </span>
+      </div>
+      </div>
+      </div>
+    </script>
+    <script type="x-template" id="qTest_tmpl">
+        <q-positiv :model="model.done"></q-positiv>
+        <q-inline :model="model.date"
+                  :prefix="prefix"></q-inline>
+        
+    </script>
+    <form class="form-inline">
+      <fieldset>
+        <!-- Form Name -->
+        <legend>Paziente</legend>
+        <q-inline :model="patient.surname"></q-inline>
+        <q-inline :model="patient.name"></q-inline>
+        <q-inline :model="patient.birth"></q-inline>
+        <q-inline :model="patient.birthplace"></q-inline>
+        <br>
+        <q-inline :model="patient.resident"></q-inline>
+        <q-inline :model="patient.address"></q-inline>
+        <q-inline :model="patient.phone"></q-inline>
+        <br>
+        <q-inline :model="patient.CF"></q-inline>
+        <q-inline :model="patient.exemption"></q-inline>
+        <q-inline :model="patient.IC"></q-inline>
+        <q-inline :model="patient.IA"></q-inline>
+
+        <q-textarea :model="patient.anamnesis"></q-inline>
+
+      </fieldset>
+
+      <fieldset>
+
+        <!-- Form Name -->
+        <legend>Indagini</legend>
+
+        <q-check :model="investigations.CSF.done"></q-check>
+        <q-inline :model="investigations.CSF.date"
+                  prefix="CSF"></q-inline>
+        <q-inline :model="investigations.CSF.normal"></q-inline>
+        <q-inline :model="investigations.CSF.OB"></q-inline>
+        <q-inline :model="investigations.CSF.parts"></q-inline>
+        <br>
+        <q-positiv :model="investigations.Ab_AQP"></q-positiv>
+        <q-positiv :model="investigations.Ab_MOG"></q-positiv>
+        
+        <q-textarea :model="investigations.xrTorso"></q-textarea>
+        <q-textarea :model="investigations.TBTest"></q-textarea>
+        <br>
+        <q-test :model="investigations.PEV"
+                prefix="PEV"></q-test>
+        <q-test :model="investigations.PEA"
+                prefix="PEA"></q-test>
+        <br>
+        <q-test :model="investigations.PESS_aass"
+                prefix="PESS_aass"></q-test>
+        <q-test :model="investigations.PESS_aaii"
+                prefix="PESS_aaii"></q-test>
+        <br>
+        <q-check :model="investigations.NMR.done"></q-check>
+        <q-inline :model="investigations.NMR.date"
+                  prefix="NMR"></q-inline>
+        <q-positiv :model="investigations.NMR.brain"></q-positiv>
+        <q-positiv :model="investigations.NMR.spinalCord"></q-positiv>
+      </fieldset>
+
+    </form>
+    <pre>{{dataset | json}}</pre>
+
+
+
+  </body>
+</html>

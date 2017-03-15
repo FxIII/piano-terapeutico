@@ -1,0 +1,13 @@
+.form-group {
+  margin-top:1em;
+}
+
+.xrTorso,.TBTest,.anamnesis{
+  margin-top:1em;
+}
+textarea#xrTorso,textarea#anamnesis,textarea#TBTest{
+  width: 100%;
+  min-height:2em;
+}
+
+
