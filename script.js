@@ -37,7 +37,7 @@ vm=new Vue({
     var mapname= function(v,k,o){v.name=k;};
     _.each(this.patient,mapname);
     _.each(this.investigations,mapname);
-    _.each(["CSF","PEV","PEA","PESS_aass","PESS_aaii"],function(key){
+    _.each(["CSF","PEV","PEA","PESS_aass","PESS_aaii","RMN"],function(key){
       _.each(self.investigations[key],mapname);
     });
   },
